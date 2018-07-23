@@ -25,6 +25,10 @@ Patching OpenSSl amd LibEST for post quantum cryptography
 1. Visit this website (Isara corp PQC test server). 
 2. Clone repo and Follow instructions for patching
 3. export path to new libraries by returning ```export PATH=/usr/local/pqpki-openssl1.0.2o/bin:$PATH``` 
+4. To install on CLI container run  ```./fabricOPS.sh cli```, then ```cd```, 
+then run ```cp $GOPATH/github.com/hyperledger/fabric/examples/chaincode/go/minimalcc2/sslPatches.sh ~/```
+then run ```bash sslPatches.sh```
+
 
 
 
