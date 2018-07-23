@@ -35,7 +35,7 @@ then run ```bash sslPatches.sh```
 Deploy Chaincode
 ----------------
 
-1. Interact with peer by using CLI container. Run ./fabricOPS.sh cli to enter CLI conatiner as root.
+1. Interact with peer by using CLI container. Run ```./fabricOPS.sh cli``` to enter CLI conatiner as root.
 2. Instantiate chaincode by running ```./scripts/instantiate.sh -c minimalcc2 -v 1.0 -p minimalcc2```
 3. Invoke chaincode by running ``` ./scripts/invoke.sh -c minimalcc2 ```
 
