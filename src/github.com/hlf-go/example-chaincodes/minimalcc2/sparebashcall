@@ -1,0 +1,21 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"os/exec"
+    "github.com/hyperledger/fabric/core/chaincode/shim"
+	pb "github.com/hyperledger/fabric/protos/peer"
+)
+
+func call_script(stub shim.ChaincodeStubInterface) pb.Response {
+	fmt.Println("starting PQC")
+	
+	out, err := exec.Command("/Users/tonyblake/go/src/github.com/hlf-go/example-chaincodes/minimalcc2/generateCerts.sh").Output()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("output is %s\n", out)
+	return shim.Success(nil)
+
+}

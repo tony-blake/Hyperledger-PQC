@@ -1,0 +1,46 @@
+#!/bin/bash
+
+PATH=/usr/local/ssl/bin:$PATH
+
+# Get CA cert
+rm 443-root.crt
+wget http://test-pqpki.com/443-root.crt
+
+export EST_OPENSSL_CACERT=`realpath 443-root.crt`
+
+pushd example/client
+
+export OUTPUT_DIR=/tmp/EST
+export OUTPUT_PKCS7_CACERT=$OUTPUT_DIR/cacert-0-0.pkcs7
+export OUTPUT_PEM_CACERT=$OUTPUT_DIR/cacert-0-0.pem
+export OUTPUT_PKCS7_CERT=$OUTPUT_DIR/cert-0-0.pkcs7
+export OUTPUT_PEM_CERT=$OUTPUT_DIR/cert-0-0.pem
+
+export EST_HOST=test-pqpki.com
+export EST_PORT=443
+# Try it with IPv4 or IPv6 addresses if you like:
+#export EST_HOST=18.217.192.8
+#export EST_HOST=2600:1f16:61c:2f02:aa2c:84ac:3758:922e
+
+export VERBOSE_FLAG=
+
+rm -rf $OUTPUT_DIR
+mkdir -p $OUTPUT_DIR
+
+function print_and_verify_cert()
+{
+	CERT=$1
+	CA_CERT=$2
+
+	# Print new cert
+	openssl x509 -engine qs_sig -in $CERT -noout -text
+
+	# Verify the cert's classical signature
+	openssl verify -CAfile $CA_CERT $CERT || exit 1
+	echo "Classical verification success"
+
+	# Verify the cert's alt signature
+	openssl x509QSVerify -engine qs_sig -root $CA_CERT -untrusted $CERT  -cert $CERT || exit 1
+	echo "Alt Signature verification success"
+}
+

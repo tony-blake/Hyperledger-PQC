@@ -1,0 +1,11 @@
+{
+	"comment": "",
+	"ignore": "test github.com/hyperledger/fabric",
+	"package": [
+		{
+			"path": "github.com/anotheruser/repo",
+			"revision": ""
+		}
+	],
+	"rootPath": "github.com/user/repo/mychaincode"
+}
