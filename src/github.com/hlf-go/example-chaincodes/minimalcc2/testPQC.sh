@@ -31,4 +31,7 @@ export VERBOSE_FLAG=
         echo "Classical verification success"
 
         # Verify the cert's alt signature
-        openssl x509QSVerify -engine qs_sig -root $OUTPUT_PEM_CACERT -untrusted $OUTPUT_PEM_CERT  -cert $OUTPUT_PEM_CERT
+        openssl x509QSVerify -engine qs_sig -root $OUTPUT_PEM_CACERT -untrusted $OUTPUT_PEM_CERT  -cert $OUTPUT_PEM_CERT 2> itworks.txt
+pwd        
+touch abc
+

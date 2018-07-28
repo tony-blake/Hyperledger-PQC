@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+	"os/exec"
+
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
@@ -13,6 +16,7 @@ type SimpleChaincode struct{}
 // Init to initiate the SimpleChaincode class
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
 	logger.Info("Hello Init")
+
 	return shim.Success([]byte("Init called"))
 }
 
@@ -23,7 +27,13 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 }
 
 func main() {
+	out, err1 := exec.Command("/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go/minimalcc2/testPQC.sh").Output()
+	if err1 != nil {
+		logger.Info(out)
+	}
+	fmt.Printf("output is %s\n", out)
 	err := shim.Start(new(SimpleChaincode))
+
 	if err != nil {
 		logger.Debugf("Error: %s", err)
 	}

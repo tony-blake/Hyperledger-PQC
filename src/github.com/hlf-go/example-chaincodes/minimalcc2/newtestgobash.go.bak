@@ -7,7 +7,7 @@ import (
 )
 
 func f() {
-	out, err := exec.Command("/Users/tonyblake/go/src/github.com/hlf-go/example-chaincodes/minimalcc2/testPQC.sh").Output()
+	out, err := exec.Command("/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go/minimalcc2/testPQC.sh").Output()
 	if err != nil {
 		log.Fatal(err)
 	}
