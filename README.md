@@ -6,7 +6,7 @@ Quick and Dirty Set Up
 -----------------------
 
 0. Clone this directory into your $HOME folder
-1. Start Docker (assuming Docker is installed)
+1. Start Docker (assuming Docker is installed) and remove existing docker containers by running ```docker rm -f $(docker ps -aq)```
 2. Navigate to ``` src/github.com/hlf-go/writing-chaincode/fabric ```
 3. run ``` curl -sSL https://raw.githubusercontent.com/hyperledger/fabric/release-1.1/scripts/bootstrap-1.1.0-preview.sh -o setup_script.sh ```
 4. run ``` bash setup_script.sh ``` (Note - This pulls more docker images than is necessary for this example. However this is suffcient for the example)
